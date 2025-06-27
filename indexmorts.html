@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+<html data-wf-domain="webdev-for-you-daily-interaction-133.webflow.io" data-wf-page="5cf7f90bc3169430d9a5d880" data-wf-site="5cf7f90bc316945447a5d87d">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Daily Interaction #133</title>
+        <meta content="This demo showcases a parallax card animation on mouse move in Webflow." name="description"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta content="Webflow" name="generator"/>
+        <link href="https://assets.website-files.com/5cf7f90bc316945447a5d87d/css/webdev-for-you-daily-interaction-133.webflow.6a34bc95c.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            WebFont.load({
+                google: {
+                    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic", "Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic", "Caveat:regular", "Nunito:200,300,regular,600,700,800,900", "Hind Madurai:300,regular,500,600,700", "Paytone One:regular", "Raleway:100,200,300,regular,500,600,700,800,900", "Roboto:100,300,regular,500,700,900", "Cormorant:300,regular,500,600,700", "Cardo:regular,italic,700", "Libre Baskerville:regular,italic,700", "Fanwood Text:regular,italic", "DM Sans:regular,500,700"]
+                }
+            });
+        </script>
+        <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
+        <script type="text/javascript">
+            !function(o, c) {
+                var n = c.documentElement
+                  , t = " w-mod-";
+                n.className += t + "js",
+                ("ontouchstart"in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
+            }(window, document);
+        </script>
+        <link href="https://assets.website-files.com/5cf7f90bc316945447a5d87d/5cf7f90bc31694afc7a5d88a_webdev-for-you-mark-32x32.png" rel="shortcut icon" type="image/x-icon"/>
+        <link href="https://assets.website-files.com/5cf7f90bc316945447a5d87d/5cf7f90bc316949527a5d8bc_webdev-for-you-mark-256x256.png" rel="apple-touch-icon"/>
+        <style>
+            body,button,input,select,textarea {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-text-size-adjust: 100%;
+                -moz-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+                text-size-adjust: 100%
+            }
+
+            body {
+                overflow-x: hidden;
+                padding-top: 54px;
+                background: #181820;
+            }
+
+            .demo-btn,.browser-demo {
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0,0,0);
+                -moz-transform: translate3d(0,0,0)
+            }
+
+            /* Responsive design for preview cards */
+            @media (max-width: 991px) { /* Adjusted breakpoint for better response */
+                .demo-wrapper a.d-133-3d-wrapper:nth-of-type(1),
+                .demo-wrapper a.d-133-3d-wrapper:nth-of-type(2) {
+                    display: none; /* Hide the first two cards */
+                }
+
+                .demo-wrapper a.d-133-3d-wrapper:nth-of-type(3) {
+                    margin: 0 auto; /* Center the third card */
+                }
+
+                .demo-wrapper {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+
+            @media (min-width: 992px) {
+                .demo-wrapper a.d-133-3d-wrapper {
+                    display: inline-block !important; /* Show all cards */
+                }
+            }
+
+            .demo-arrow-wrapper {
+                transition: transform 0.1s ease-out;
+            }
+
+            .d-133-3d-wrapper {
+                transition: transform 0.2s ease-out;
+            }
+
+            .w-webflow-badge {
+                display: none !important;
+            }
+
+            /* Make header transparent white */
+            .navbar {
+                background: #181820;
+                box-shadow: 0 0 32px 0 #a084ee33;
+                transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-bottom: none;
+                padding: 16px 0 0 0;
+                min-height: 64px;
+            }
+
+            .navbar:hover {
+                box-shadow: 0 0 64px 0 #a084ee99, 0 0 32px 0 #a084ee33;
+            }
+
+            .grid-navbar {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 92%;
+                max-width: 1150px;
+                margin: 0 auto;
+            }
+
+            /* Time card (left) */
+            .philippines-time {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-family: 'Montserrat', sans-serif;
+                padding: 12px 28px;
+                background: #181820;
+                border-radius: 16px;
+                border: 2.5px solid #a084ee;
+                box-shadow: 0 0 16px 2px #a084ee;
+                position: relative;
+                transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
+                font-size: 1.05rem;
+                margin-left: 0;
+                margin-right: 48px;
+            }
+
+            .philippines-time:hover {
+                box-shadow: 0 0 32px 6px #a084ee, 0 0 16px 2px #a084ee;
+                border-color: #c77dff;
+            }
+
+            .time-display {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 4px;
+                letter-spacing: 1px;
+                text-shadow: 0 2px 8px #a084ee99;
+            }
+
+            .timezone-label {
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: #bdbdbd;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                text-shadow: 0 1px 6px #a084ee55;
+            }
+
+            /* Navigation links (center) */
+            .nav-menu {
+                display: flex;
+                align-items: center;
+                gap: 36px;
+                margin: 0 auto;
+            }
+
+            .nav-link-demo, .w-nav-link {
+                color: #fff !important;
+                font-weight: 600;
+                font-size: 1.08rem;
+                text-shadow: 0 1px 3px #a084ee44;
+                transition: color 0.2s, text-shadow 0.2s;
+                position: relative;
+                padding: 0 6px;
+            }
+
+            .nav-link-demo:hover, .w-nav-link:hover {
+                color: #c77dff !important;
+                text-shadow: 0 0 12px #a084ee, 0 1px 3px #a084ee44;
+            }
+
+            /* Super Chat button (right) */
+            .nav-link-super-chat {
+                background: #181820;
+                border: 2px solid #a084ee;
+                border-radius: 20px;
+                padding: 8px 28px;
+                color: #ccc !important;
+                font-weight: 600;
+                font-size: 1.08rem;
+                box-shadow: 0 0 8px #a084ee44;
+                transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+                margin-left: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-link-super-chat:hover {
+                background: #2d1846;
+                color: #fff !important;
+                box-shadow: 0 0 24px #a084ee99;
+                border-color: #c77dff;
+            }
+
+            .super-chat-text {
+                color: inherit !important;
+                font-weight: 600;
+                text-shadow: 0 1px 3px #a084ee44;
+            }
+
+            /* Hide navigation arrows in maximized view, show in minimized view */
+            .demo-left-arrow-wrapper,
+            .demo-right-arrow-wrapper {
+                display: none; /* Hide by default on desktop */
+            }
+
+            /* Show navigation arrows only in minimized view */
+            @media (max-width: 991px) {
+                .demo-left-arrow-wrapper,
+                .demo-right-arrow-wrapper {
+                    display: block; /* Show on mobile/minimized view */
+                }
+                .demo-left-arrow-wrapper {
+                    position: fixed;
+                    left: 24px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 1001;
+                }
+                .demo-right-arrow-wrapper {
+                    position: fixed;
+                    right: 24px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 1001;
+                }
+            }
+
+            /* Ensure consistent card positioning in minimized mode */
+            .d-133-3d-wrapper.minimized {
+                position: relative !important;
+                left: 0 !important;
+                top: 0 !important;
+                transform: none !important;
+                margin: 0 auto !important;
+            }
+
+            /* Professional Profile Display Styles */
+            .profile-display {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 8px 16px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 25px;
+                box-shadow: 0 4px 15px hsla(229, 76%, 66%, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .profile-display:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            }
+
+            .profile-avatar {
+                width: 40px;
+                height: 40px;
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 14px;
+                color: #667eea;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .profile-info {
+                display: flex;
+                flex-direction: column;
+                color: white;
+            }
+
+            .profile-name {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+
+            .profile-title {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 400;
+                font-size: 11px;
+                opacity: 0.9;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            @media (max-width: 768px) {
+                .profile-display {
+                    padding: 6px 12px;
+                    gap: 8px;
+                }
+                
+                .profile-avatar {
+                    width: 32px;
+                    height: 32px;
+                    font-size: 12px;
+                }
+                
+                .profile-name {
+                    font-size: 12px;
+                }
+                
+                .profile-title {
+                    font-size: 10px;
+                }
+            }
+
+            /* Profile Button Styles for Bottom Left */
+            .profile-button-wrapper {
+                position: fixed;
+                bottom: 30px;
+                left: 30px;
+                z-index: 1000;
+                transform: none;
+            }
+
+            .profile-button {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 25px;
+                background: linear-gradient(135deg, #4513bb 0%, #a084ee99 100%);
+                border: none;
+                border-radius: 35px;
+                box-shadow: 0 10px 30px #ffffff66;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                cursor: pointer;
+                font-family: 'Montserrat', sans-serif;
+                color: white;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .profile-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                transition: left 0.6s;
+            }
+
+            .profile-button:hover::before {
+                left: 100%;
+            }
+
+            .profile-button:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 15px 40px #ffffff66;
+            }
+
+            .profile-button:active {
+                transform: translateY(-2px) scale(0.98);
+                box-shadow: 0 8px 25px #ffffff66;
+            }
+
+            .profile-button .profile-avatar {
+                width: 50px;
+                height: 50px;
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 800;
+                font-size: 18px;
+                color: #000000;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                flex-shrink: 0;
+                position: relative;
+                z-index: 1;
+                transition: all 0.3s ease;
+            }
+
+            .profile-button:hover .profile-avatar {
+                transform: scale(1.1);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .profile-button .profile-info {
+                display: flex;
+                flex-direction: column;
+                color: white;
+                text-align: left;
+                position: relative;
+                z-index: 1;
+            }
+
+            .profile-button .profile-name {
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 1.2;
+                margin-bottom: 4px;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                letter-spacing: 0.5px;
+            }
+
+            .profile-button .profile-title {
+                font-weight: 500;
+                font-size: 13px;
+                opacity: 0.95;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            }
+
+            @media (max-width: 768px) {
+                .profile-button-wrapper {
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+                
+                .profile-button {
+                    padding: 12px 20px;
+                    gap: 12px;
+                }
+                
+                .profile-button .profile-avatar {
+                    width: 42px;
+                    height: 42px;
+                    font-size: 16px;
+                }
+                
+                .profile-button .profile-name {
+                    font-size: 16px;
+                }
+                
+                .profile-button .profile-title {
+                    font-size: 12px;
+                }
+            }
+
+            /* --- Custom Jay Mark Profile Button Redesign --- */
+            .profile-button.custom-profile-button {
+                width: 56px;
+                min-width: 56px;
+                max-width: 56px;
+                height: 56px;
+                min-height: 56px;
+                max-height: 56px;
+                padding: 0;
+                overflow: hidden;
+                border-radius: 50%;
+                transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+                justify-content: center;
+                align-items: center;
+                display: flex;
+            }
+            .profile-button.custom-profile-button .custom-profile-info {
+                opacity: 0;
+                width: 0;
+                margin-left: 0;
+                pointer-events: none;
+                transition: opacity 0.3s, width 0.3s, margin 0.3s;
+                white-space: nowrap;
+            }
+            .profile-button.custom-profile-button:hover, .profile-button.custom-profile-button:focus {
+                width: 220px;
+                min-width: 220px;
+                max-width: 320px;
+                height: 56px;
+                min-height: 56px;
+                max-height: 56px;
+                padding: 8px 24px 8px 16px;
+                border-radius: 32px;
+                justify-content: flex-start;
+            }
+            .profile-button.custom-profile-button:hover .custom-profile-info, .profile-button.custom-profile-button:focus .custom-profile-info {
+                opacity: 1;
+                width: auto;
+                margin-left: 16px;
+                pointer-events: auto;
+                }
+            .profile-button.custom-profile-button .custom-avatar {
+                transition: all 0.3s;
+                }
+            .profile-button.custom-profile-button:hover .custom-avatar, .profile-button.custom-profile-button:focus .custom-avatar {
+                transform: scale(1.1);
+            }
+
+            /* Card zoom animation */
+            .d-133-3d-wrapper.zooming {
+                z-index: 1002;
+                transform: scale(1.15) !important;
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s;
+                box-shadow: 0 8px 40px 0 #a084ee99;
+            }
+            .d-133-3d-wrapper.fading {
+                opacity: 0.2;
+                transition: opacity 0.4s;
+                pointer-events: none;
+            }
+
+            .marquee-header {
+                width: 100%;
+                background: #181820;
+                border-bottom: 2px solid #a084ee;
+                box-shadow: 0 0 12px 0 #a084ee33;
+                padding: 0;
+                margin: 0;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 2000;
+            }
+            .marquee-container {
+                width: 100%;
+                padding: 6px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .marquee-container marquee {
+                width: 100%;
+                color: #fff;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 1rem;
+                letter-spacing: 0.5px;
+                background: none;
+                border: none;
+                outline: none;
+                transition: box-shadow 0.3s, border-color 0.3s;
+            }
+            .marquee-container:hover marquee {
+                color: #fff;
+                text-shadow: 0 0 12px #a084ee, 0 1px 3px #a084ee44;
+                box-shadow: 0 0 32px 0 #a084ee99, 0 0 12px 0 #a084ee33;
+                border-bottom: 2px solid #c77dff;
+            }
+            @media (max-width: 600px) {
+                .marquee-container marquee {
+                    font-size: 0.85rem;
+                }
+            }
+            .top-marquee-bar {
+                width: 100%;
+                background: #181820;
+                border-bottom: 2px solid #a084ee;
+                box-shadow: 0 0 12px 0 #a084ee33;
+                padding: 0;
+                margin: 0;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 2000;
+                height: 54px;
+                display: flex;
+                align-items: center;
+                transition: box-shadow 0.3s, border-color 0.3s;
+            }
+            .top-marquee-bar marquee {
+                width: 100%;
+                color: #fff;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 1.35rem;
+                letter-spacing: 0.5px;
+                background: none;
+                border: none;
+                outline: none;
+            }
+            .top-marquee-bar:hover {
+                box-shadow: 0 0 32px 0 #a084ee99, 0 0 12px 0 #a084ee33;
+                border-bottom: 2px solid #c77dff;
+            }
+            @media (max-width: 600px) {
+                .top-marquee-bar marquee {
+                    font-size: 0.85rem;
+                }
+            }
+
+            /* Custom image for ABOUT ME card */
+            .d-133-image-wrapper:not(._2):not(._3) {
+                background-image: url('assets/1.jpg') !important;
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+            }
+
+            /* Custom image for PORTFOLIO card */
+            .d-133-image-wrapper._2 {
+                background-image: url('assets/2.jpg') !important;
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+            }
+
+            /* Custom image for CONTACT & RESUME card */
+            .d-133-image-wrapper._3 {
+                background-image: url('assets/3.jpg') !important;
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+            }
+
+            /* Ensure all card images fill the card area */
+            .d-133-card-wrapper {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .d-133-image-wrapper {
+                width: 100%;
+                height: 100%;
+                min-height: 180px;
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+                border-radius: 18px;
+                overflow: hidden;
+                flex: 1 1 auto;
+            }
+
+            #welcome-marquee {
+                font-family: 'Montserrat', sans-serif !important;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+            .info-section {
+                padding: 80px 20px;
+                background: rgba(24,24,32,0.95);
+                margin-top: 40px;
+                border-radius: 18px;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                color: #fff;
+                box-shadow: 0 4px 24px #0002;
+            }
+            .contact-header {
+                position: absolute;
+                top: -7px;
+                left: 32px;
+                text-align: left;
+            }
+            .contact-section {
+                position: relative;
+                min-height: 220px;
+            }
+            .contact-details {
+                position: absolute;
+                left: 32px;
+                bottom: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .contact-link {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                transition: color 0.2s;
+            }
+            .contact-link:hover {
+                color: #a084ee;
+                text-decoration: underline;
+            }
+            .about-header {
+                position: absolute;
+                top: 32px;
+                left: 32px;
+                text-align: left;
+            }
+            .about-section {
+                position: relative;
+                min-height: 220px;
+            }
+            .portfolio-header {
+                position: absolute;
+                top: 32px;
+                left: 32px;
+                text-align: left;
+            }
+            .portfolio-section {
+                position: relative;
+                min-height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Marquee at the top, fixed -->
+        <div class="top-marquee-bar">
+            <marquee id="welcome-marquee" behavior="scroll" direction="left" scrollamount="5">
+                Welcome to my website &nbsp; | &nbsp; <span id="ph-marquee-time">Loading date and time...</span> &nbsp; |  © 2025 Jay Mark Mortel. All rights reserved.
+            </marquee>
+        </div>
+        <div class="d-133-section-home wf-section">
+            <div class="demo-container">
+                <div class="demo-main-text-wrapper">
+                    <h1 class="demo-heading h1">Welcome to Daily Interaction 67</h1>
+                    <h2 class="demo-heading h2">Add to Cart Button Animation on Hover</h2>
+                    <div class="separator"></div>
+                    <p class="demo-p main">This example showcases moving lines around an image. The image also has a 3d rotation on hover.</p>
+                </div>
+                <div class="demo-wrapper">
+                    <div class="instructions-wrapper">
+                        <p class="demo-p arrow">
+                            do the honors,<br/>hover over the button!
+                        </p>
+                        <img src="https://assets.website-files.com/5c345004f07efebe2593a215/5c3dc840fa928d0e6c194746_arrow.svg" width="35" alt="" class="image-2"/>
+                    </div>
+                    <div class="browser-demo">
+                        <div class="browser-top">
+                            <div class="browser-dot"></div>
+                            <div class="browser-dot yellow"></div>
+                            <div class="browser-dot green"></div>
+                        </div>
+                    </div>
+                    <div class="d-133-3d-wrapper w-inline-block card-scroll" data-section="contact-section">
+                        <div class="d-133-card-wrapper">
+                            <div class="d-133-image-wrapper _3"></div>
+                            <div class="d-133-color-overlay"></div>
+                            <div class="d-133-border">
+                                <div class="d-133-text-wrapper">
+                                    <h3 class="d-133-h3-heading">CONTACT</h3>
+                                    <p class="d-133-paragraph">Reach out for collaboration, inquiries, or opportunities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-133-3d-wrapper w-inline-block card-scroll" data-section="portfolio-section">
+                        <div class="d-133-card-wrapper">
+                            <div class="d-133-image-wrapper _2"></div>
+                            <div class="d-133-color-overlay"></div>
+                            <div class="d-133-border">
+                                <div class="d-133-text-wrapper">
+                                    <h3 class="d-133-h3-heading">PORTFOLIO</h3>
+                                    <p class="d-133-paragraph">Projects showcasing design, websites, and coding projects.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-133-3d-wrapper w-inline-block card-scroll" data-section="about-section">
+                        <div class="d-133-card-wrapper">
+                            <div class="d-133-image-wrapper"></div>
+                            <div class="d-133-color-overlay"></div>
+                            <div class="d-133-border">
+                                <div class="d-133-text-wrapper">
+                                    <h3 class="d-133-h3-heading">ABOUT ME</h3>
+                                    <p class="d-133-paragraph">Get to know who I am and my background.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-left-arrow-wrapper">
+                    <a data-w-id="a09ea559-aa78-b1ba-5b32-b96313bdf287" href="#" class="demo-arrow-wrapper w-inline-block">
+                        <img src="https://assets.website-files.com/5c577e0f046430f4d4b28a6c/5c577e0f04643046abb28a76_Left-arrow.svg" width="20" alt="" class="image-3"/>
+                        <div style="opacity:0;-webkit-transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="demo-arrow-text">Prev</div>
+                    </a>
+                </div>
+                <div class="demo-right-arrow-wrapper">
+                    <a data-w-id="a09ea559-aa78-b1ba-5b32-b96313bdf28c" href="#" class="demo-arrow-wrapper next w-inline-block">
+                        <div style="opacity:0;-webkit-transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="demo-arrow-text">Next</div>
+                        <img src="https://assets.website-files.com/5c577e0f046430f4d4b28a6c/5c577e0f046430d8a4b28a78_Right-arrow.svg" width="20" alt="" class="image-3"/>
+                    </a>
+                </div>
+                <div class="demo-bottom-buttons">
+                    <!-- Jay Mark Profile Button -->
+                    <div class="profile-button-wrapper">
+                        <button class="profile-button custom-profile-button" id="profile-button">
+                            <div class="profile-avatar custom-avatar">UP</div>
+                            <div class="profile-info custom-profile-info">
+                                <div class="profile-name custom-profile-name">Jay Mark</div>
+                                <div class="profile-title custom-profile-title">WEB DEV</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div data-w-id="a09ea559-aa78-b1ba-5b32-b96313bdf29c" class="clone-instructions-panel">
+                <div data-w-id="a09ea559-aa78-b1ba-5b32-b96313bdf29d" class="inner-wrapper">
+                    <div data-w-id="a09ea559-aa78-b1ba-5b32-b96313bdf29e" class="panel-text-wrapper">
+                        <h1 class="demo-heading h1 popup">Cloning Instructions </h1>
+                        <h2 class="demo-heading h2 popup">To copy this project into your own project simply click on the &#x27;clone &#x27;button below.</h2>
+                        <div class="separator popup"></div>
+                        <p class="demo-p main popup">After the project is cloned you can copy the &#x27;d-133-3d-wrapper &#x27;to use the &#x27;parallax card animation on mouse move.&#x27;The animations are copied into the Webflow &#x27;Interactions (H)&#x27;panel.</p>
+                        <div class="panel-button-wrapper">
+                            <a href="https://webflow.com/website/WebDev-For-You-Daily-Interaction-133?rfsn=1655335.42f776" data-w-id="a09ea559-aa78-b1ba-5b32-b96313bdf2a7" target="_blank" class="demo-btn f-1 w-inline-block">
+                                <div class="demo-btn-text f-1">Clone</div>
+                                <div style="-webkit-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="demo-btn-wrapper-block"></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div data-w-id="a09ea559-aa78-b1ba-5b32-b96313bdf2ab" class="demo-close-div popup">
+                        <div class="close-line popup"></div>
+                        <div class="close-line rotate popup"></div>
+                    </div>
+                </div>
+            </div>
+            <div data-w-id="2fe1c126-499c-a307-c0e5-48859d7ecb47" class="learn-ui-panel">
+                <div data-w-id="2fe1c126-499c-a307-c0e5-48859d7ecb48" class="inner-wrapper">
+                    <div data-w-id="2fe1c126-499c-a307-c0e5-48859d7ecb49" class="panel-text-wrapper">
+                        <h1 class="demo-heading h1 popup">Learn UI Design</h1>
+                        <h2 class="demo-heading h2 popup">The most comprehensive UI Design course on the web.</h2>
+                        <div class="separator popup"></div>
+                        <p class="demo-p main popup">The Learn UI Design course by Erik Kennedy is the most comprehensive course on UI Design on the web. It covers everything from typography, color, elements, and process. If you are new to web development or design I'm highly recommend this course.</p>
+                        <div class="panel-button-wrapper">
+                            <a href="https://bit.ly/learn-ui-design-course" data-w-id="2fe1c126-499c-a307-c0e5-48859d7ecb52" target="_blank" class="demo-btn f-1 w-inline-block">
+                                <div class="demo-btn-text f-1 ui-design">Go to Course</div>
+                                <div style="-webkit-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="demo-btn-wrapper-block"></div>
+                                <img src="https://assets.website-files.com/5cf7f90bc316945447a5d87d/5cf7f90bc316945182a5d8c8_Right-arrow.svg" width="15" alt="" class="learn-ui-panel-right-arrow"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div data-w-id="2fe1c126-499c-a307-c0e5-48859d7ecb56" class="demo-close-div popup">
+                        <div class="close-line popup"></div>
+                        <div class="close-line rotate popup"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Info Sections for Each Card -->
+        <div id="about-section" class="info-section about-section">
+            <div class="about-header">
+                <h2>About Me</h2>
+                <p>Hello! I'm Jay Mark, a passionate web developer with a love for creative design and interactive experiences. I enjoy building modern, responsive websites and learning new technologies.</p>
+            </div>
+        </div>
+        <div id="portfolio-section" class="info-section portfolio-section">
+            <div class="portfolio-header">
+                <h2>Portfolio</h2>
+                <p>Here you'll find a selection of my projects, including web apps, design work, and coding experiments. Each project reflects my dedication to quality and innovation.</p>
+            </div>
+        </div>
+        <div id="contact-section" class="info-section contact-section">
+            <div class="contact-header">
+                <h2>Contact</h2>
+                <p>Interested in working together or want to know more? Reach out via the details below:</p>
+            </div>
+            <div class="contact-details">
+                <div class="contact-link">📧 jaymarkmortel1877@gmail.com</div>
+                <div class="contact-link">📱 09693226491</div>
+                <a href="https://github.com/Jaimaku" class="contact-link" target="_blank">🐙 github.com/Jaimaku</a>
+                <a href="https://www.facebook.com/share/1AFjKLmGAE/?mibextid=qi2Omg" class="contact-link" target="_blank">📘 Facebook</a>
+            </div>
+        </div>
+        <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5cf7f90bc316945447a5d87d" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://assets.website-files.com/5cf7f90bc316945447a5d87d/js/webflow.e55b116bc.js" type="text/javascript"></script>
+        <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+        <script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Philippines Date and Time for Marquee
+                function updateMarqueeTime() {
+                    const marqueeTime = document.getElementById('ph-marquee-time');
+                    if (marqueeTime) {
+                        const now = new Date();
+                        const philippinesTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Manila"}));
+                        const options = {
+                            year: 'numeric', month: 'long', day: '2-digit',
+                            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+                        };
+                        marqueeTime.textContent = philippinesTime.toLocaleString('en-US', options);
+                    }
+                }
+                updateMarqueeTime();
+                setInterval(updateMarqueeTime, 1000);
+
+                // Profile Button Functionality
+                const profileButton = document.getElementById('profile-button');
+                profileButton.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => { this.style.transform = ''; }, 150);
+                    if (window.confirm("Hello! I'm Jay Mark, a Web Developer. Nice to meet you!")) {
+                        // Scroll to the main card section
+                        const mainSection = document.querySelector('.d-133-section-home');
+                        if(mainSection) {
+                            mainSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+
+                // Card logic
+                const cards = document.querySelectorAll('.d-133-3d-wrapper');
+                let currentSlideIndex = 0;
+                // const cardLinks = [
+                //     'https://contact.blank',
+                //     'https://portfolio.blank',
+                //     'https://about.blank'
+                // ];
+
+                // Card hover 3D effect
+                cards.forEach(card => {
+                    card.addEventListener('mousemove', e => {
+                        const r = card.getBoundingClientRect(),
+                              x = e.clientX - r.left, y = e.clientY - r.top,
+                              mx = r.width / 2, my = r.height / 2,
+                              iy = ((x - mx) / mx) * 15, ix = -((y - my) / my) * 15;
+                        card.style.transform = `rotateX(${ix}deg) rotateY(${iy}deg) scale3d(1.05,1.05,1.05)`;
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+                    });
+                });
+
+                // Removed old card click: zoom and redirect code
+
+                // Navigation arrows
+                const nextBtn = document.querySelector('.demo-right-arrow-wrapper .demo-arrow-wrapper');
+                const prevBtn = document.querySelector('.demo-left-arrow-wrapper .demo-arrow-wrapper');
+                function showSlide(idx) {
+                    cards.forEach((card, i) => {
+                        card.style.display = (i === idx) ? 'inline-block' : 'none';
+                        card.classList.toggle('minimized', i === idx);
+                    });
+                    const demoWrapper = document.querySelector('.demo-wrapper');
+                    if (demoWrapper) demoWrapper.style.justifyContent = 'center';
+                }
+                if (nextBtn && prevBtn) {
+                    nextBtn.addEventListener('click', e => {
+                        e.preventDefault();
+                        if (window.innerWidth <= 991) {
+                            currentSlideIndex = (currentSlideIndex + 1) % cards.length;
+                            showSlide(currentSlideIndex);
+                        }
+                    });
+                    prevBtn.addEventListener('click', e => {
+                        e.preventDefault();
+                        if (window.innerWidth <= 991) {
+                            currentSlideIndex = (currentSlideIndex - 1 + cards.length) % cards.length;
+                            showSlide(currentSlideIndex);
+                        }
+                    });
+                }
+
+                // Responsive: handle maximize/minimize
+                function handleResize() {
+                    if (window.innerWidth > 991) {
+                        cards.forEach(card => {
+                            card.style.display = 'inline-block';
+                            card.classList.remove('minimized');
+                        });
+                        const demoWrapper = document.querySelector('.demo-wrapper');
+                        if (demoWrapper) demoWrapper.style.justifyContent = '';
+                    } else {
+                        showSlide(currentSlideIndex);
+                    }
+                }
+                window.addEventListener('resize', handleResize);
+                handleResize(); // Initial call
+
+                // Animate body background color with Anime.js
+                anime({
+                    targets: 'body',
+                    backgroundColor: [
+                        '#181820',
+                        '#232046',
+                        '#181820'
+                    ],
+                    duration: 6000,
+                    direction: 'alternate',
+                    easing: 'easeInOutSine',
+                    loop: true
+                });
+
+                // Card scroll-to-section functionality
+                document.querySelectorAll('.card-scroll').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        const sectionId = this.getAttribute('data-section');
+                        const section = document.getElementById(sectionId);
+                        if(section) {
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
